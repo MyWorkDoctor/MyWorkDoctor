@@ -1,0 +1,20 @@
+.row
+    .col-xs-12
+        h3 What part of your body is injured?
+.row    
+    input.pull-left.injury-type(type='checkbox', name="cut", id="cut", ng-model="cut")
+    label.injury-multi-select(for='cut') Cut
+.row    
+    input.pull-left.injury-type(type='checkbox', name="burn", id="burn", ng-model="burn")
+    label.injury-multi-select(for='burn') Burn
+.row    
+    input.pull-left.injury-type(type='checkbox', name="strain", id="strain", ng-model="strain")
+    label.injury-multi-select(for='strain') Starin/Sprain
+.row    
+    input.pull-left.injury-type(type='checkbox', name="crush", id="crush", ng-model="crush")
+    label.injury-multi-select(for='crush') Crush
+.row
+     .col-xs-12
+        h4 Others :
+        textarea.other-injury-types
+include ../includes/footer

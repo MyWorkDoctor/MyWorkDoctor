@@ -1,0 +1,204 @@
+body { 
+    padding-top: 70px; 
+}
+p, label{
+    margin: 0;
+}
+input[type=checkbox], input[type=radio] {
+    display: none;
+}
+.navbar-brand {
+    float:none;    
+}
+.navbar-brand span {
+    color: #ffffff;
+}
+.navbar-header {
+    float: left;
+    padding: 15px;
+    text-align: center;
+    width: 100%;    
+    background-color: rgb(108, 156, 202);
+}
+.img-responsive{
+    margin: 0 auto;
+}
+.patient-form{
+    background-color: rgb(108, 156, 202);
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.radio, .checkbox, .injury-multi-select, .body-part-multi-select, .pain-level-select {
+    position: relative;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin: 0;
+    font-weight: normal;
+    color: #999;    
+}
+.checkbox, .injury-multi-select, .body-part-multi-select, .pain-level-select {
+    display: inline;
+    padding-left: 30px;
+    margin-left: 10px;
+    font-size: 18px;
+}
+.radio::before, .pain-level-select::before {
+    background: url('../images/checkbox-un-checked.png') no-repeat right;
+    position: absolute;
+    top: 1px;
+    bottom: 1px;
+    right: 37px;
+    width: 1px;    
+}
+.radio::after, .checkbox::before, .injury-multi-select::before, .body-part-multi-select::before, .pain-level-select::before {
+    position: absolute;
+    top: 0px;    
+    content: '';
+    float: left;
+    width: 20px;
+    height: 20px;    
+    background-image: url('../images/checkbox-un-checked.png');
+    background-size: 20px 20px;
+    background-position: center top;
+    background-repeat: no-repeat;
+}
+.injury-multi-select::before, .pain-level-select::before{
+    background-image: url('../images/radio-un-checked.png');
+}
+.radio::after {
+    right: 0;
+}
+.checkbox::before, .injury-multi-select::before, .body-part-multi-select::before, .pain-level-select::before {
+    left: 0;
+}
+.pain-level:checked + .pain-level-select::before,
+.body-part-type:checked + .body-part-multi-select::before,
+.injury-type:checked + .injury-multi-select::before,
+.accept:checked + .checkbox::before,
+.patient-type:checked + .radio::after {
+    background-image: url('../images/checkbox-checked.png');
+    background-size: 20px 20px;
+    background-position: center top;
+    background-repeat: no-repeat;
+}
+.injury-type:checked + .injury-multi-select::before, .pain-level:checked + .pain-level-select::before {
+    background-image: url('../images/radio-checked.png');
+}
+.help-text {
+    color: #fff;
+    text-align: center;
+}
+.help-text a {
+    color: #fff;
+    text-decoration: underline;
+}
+.msg-error {
+    color: red;
+}
+.terms {
+    max-height: 100px;
+    overflow-y: auto;
+}
+.nxt-bck-btns{
+    display: table;
+    margin: 10px auto;
+}
+.nxt-btn {
+    float: right;
+    margin-left: 10px;
+}
+.bck-btn {
+    float: left;
+    margin-right: 10px;
+}
+.footer-phone{
+    display: table;
+    margin: 0 auto !important;
+}
+.camera-nxt{
+    left: 0;
+    right: 0;
+    bottom: 10px;
+    position: absolute;
+}
+.camera-nxt > img {
+    margin-bottom: 10px;
+}
+.other-injury-types{
+    width: 100%;
+    height: 100px;
+}
+.radio-btn-grp {
+    text-align: center;
+}
+.pain-level-scale{
+    margin: 0 auto;
+}
+.max-scale {
+    text-align: left;    
+}
+.min-scale {
+    text-align: right;
+}
+.progress-wrapper{
+    margin-top: 10px;    
+    margin-bottom: 10px;
+}
+.progress-wrapper > div:first-child , .progress-wrapper > div:last-child {
+    display: table;
+    height: 100%;
+}
+.progress-wrapper > div > span {
+    display: table-cell;
+    vertical-align: middle;
+    color: #b03060;
+    font-size: 18px;
+    line-height: 18px;
+    padding-top: 10px;
+}
+.progress-scale{    
+    display: table;
+    margin: 0 auto;
+    position: relative;
+}
+.progress-smileys{
+    padding-top: 5px;
+}
+.progress-smileys > img:first-child {
+    float: right;
+}
+.progress-smileys > img:nth-child(2) {
+    float: left;
+}
+.progress-smileys > img:last-child {
+    display: table;
+    margin: 0 auto;
+}
+.provider-msg{
+    font-size: 20px;
+    text-align: center;
+    margin-top: 10px;
+}
+.thankyou-msg{
+    text-align: center;
+    font-size: 20px;
+}
+.progress-bar-warpper{
+    position: absolute;
+    top: 17px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 90%;
+}
+.progress {
+    background: rgba(255, 255, 255, 1); border: 0px solid rgba(245, 245, 245, 1);border-radius: 10px; height: 20px;
+}
+.progress-bar-custom {
+    background: rgba(196, 106, 33, 1); background: -webkit-linear-gradient(top, rgba(245, 182, 88, 1) 0%, rgba(196, 106, 33, 1) 100%); background: linear-gradient(to bottom, rgba(245, 182, 88, 1) 0%, rgba(196, 106, 33, 1) 100%);
+}

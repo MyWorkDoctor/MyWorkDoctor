@@ -1,9 +1,14 @@
-!!!
-html(ng-app="myApp")
+doctype html
+html(ng-app='MyWorkDoc')
   head
-    meta(charset='utf8')
-    base(href='/')
-    title Angular Express Seed App
-    link(rel='stylesheet', href='/css/app.css')
-  body
-    block body
+    title= title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='My Work Doc', content='')
+    meta(name='Hemanth', content='')
+    include ./includes/styles    
+    include ./includes/scripts   
+  body(ng-controller="appCtrl")    
+    block header
+    block content
+    block footer

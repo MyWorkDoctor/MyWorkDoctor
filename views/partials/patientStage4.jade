@@ -1,0 +1,73 @@
+.row
+    .col-xs-12
+        h3 Rate your pain level on a scale of 1-10 with 10 being the worst
+.row
+    .col-xs-1(ng-init="patient.props.type = 'painLevelFive';progressValue = 50")
+    .col-xs-1.radio-btn-grp
+        input.pull-right.pain-level(type='radio', name="painLevel", id="painLevelOne", checked, ng-model="patient.props.type", value="painLevelOne", ng-change="ratePainLevel(10)")
+        label.pain-level-select(for='painLevelOne')
+            br
+            | 1
+    .col-xs-1.radio-btn-grp
+        input.pull-right.pain-level(type='radio', name="painLevel", id="painLevelTwo", checked, ng-model="patient.props.type", value="painLevelTwo", ng-change="ratePainLevel(20)")
+        label.pain-level-select(for='painLevelTwo')
+            br
+            | 2
+    .col-xs-1.radio-btn-grp
+        input.pull-right.pain-level(type='radio', name="painLevel", id="painLevelThree", checked, ng-model="patient.props.type", value="painLevelThree", ng-change="ratePainLevel(30)")
+        label.pain-level-select(for='painLevelThree')
+            br
+            | 3
+    .col-xs-1.radio-btn-grp
+        input.pull-right.pain-level(type='radio', name="painLevel", id="painLevelFour", checked, ng-model="patient.props.type", value="painLevelFour", ng-change="ratePainLevel(40)")
+        label.pain-level-select(for='painLevelFour')
+            br
+            | 4
+    .col-xs-1.radio-btn-grp
+        input.pull-right.pain-level(type='radio', name="painLevel", id="painLevelFive", checked, ng-model="patient.props.type", value="painLevelFive", ng-change="ratePainLevel(50)")
+        label.pain-level-select(for='painLevelFive')
+            br
+            | 5
+    .col-xs-1.radio-btn-grp
+        input.pull-right.pain-level(type='radio', name="painLevel", id="painLevelSix", checked, ng-model="patient.props.type", value="painLevelSix", ng-change="ratePainLevel(60)")
+        label.pain-level-select(for='painLevelSix')
+            br
+            | 6
+    .col-xs-1.radio-btn-grp
+        input.pull-right.pain-level(type='radio', name="painLevel", id="painLevelSeven", checked, ng-model="patient.props.type", value="painLevelSeven", ng-change="ratePainLevel(70)")
+        label.pain-level-select(for='painLevelSeven')
+            br
+            | 7
+    .col-xs-1.radio-btn-grp
+        input.pull-right.pain-level(type='radio', name="painLevel", id="painLevelEight", checked, ng-model="patient.props.type", value="painLevelEight", ng-change="ratePainLevel(80)")
+        label.pain-level-select(for='painLevelEight')
+            br
+            | 8
+    .col-xs-1.radio-btn-grp
+        input.pull-right.pain-level(type='radio', name="painLevel", id="painLevelNine", checked, ng-model="patient.props.type", value="painLevelNine", ng-change="ratePainLevel(90)")
+        label.pain-level-select(for='painLevelNine')
+            br
+            | 9
+    .col-xs-1.radio-btn-grp
+        input.pull-right.pain-level(type='radio', name="painLevel", id="painLevelTen", checked, ng-model="patient.props.type", value="painLevelTen", ng-change="ratePainLevel(100)")
+        label.pain-level-select(for='painLevelTen')
+            br
+            | 10
+    .col-xs-1
+.row.progress-wrapper
+    .col-xs-1.min-scale 
+        span 0
+    .col-xs-10
+        .progress-scale
+            img(src="../images/progress-bar-bottom-bg.png", alt="My Work Doctor Logo")
+            .progress-smileys
+                img(src="../images/face-icon-red.png", alt="My Work Doctor Logo")
+                img(src="../images/face-icon-yellow.png", alt="My Work Doctor Logo")
+                img(src="../images/face-icon-green.png", alt="My Work Doctor Logo")
+            .progress-bar-warpper
+                .progress
+                  .progress-bar.progress-bar-warning(role='progressbar', aria-valuenow='{{progressValue}}', aria-valuemin='0', aria-valuemax='100', style='width: {{progressValue}}%')
+                    span.sr-only 60% Complete (warning)
+    .col-xs-1.max-scale 
+        span 10
+include ../includes/footer 

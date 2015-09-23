@@ -2,6 +2,7 @@ DEPS = ["$q", "$http", "$log", "$upload"]
 
 var factory = function($q, $http, log, $upload) {
     var Patient = {
+        authKey : "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==",
         baseUrl : function (){
             return "/";// http://49.238.48.45:3000/
         },
@@ -65,7 +66,8 @@ var factory = function($q, $http, log, $upload) {
             var error = function (errMsg) {
                 return q.reject(errMsg)
             }
-            $http.post(this.addQuestionsUrl(), props)
+            $http.post(this.addQuestionsUrl(), props, { 
+                headers: {'Auth': this.authKey}})
                 .success(success)
                 .error(error)
             return q.promise
@@ -85,7 +87,8 @@ var factory = function($q, $http, log, $upload) {
             }
             $upload.upload({
                 url: this.uploadImageUrl(),
-                data: props
+                data: props,
+                headers: {'Auth': this.authKey}
               })
               .success(success)
               .error(error)            

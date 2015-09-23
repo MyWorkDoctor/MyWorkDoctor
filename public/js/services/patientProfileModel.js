@@ -8,6 +8,7 @@ var service = function(rootScope) {
     this.injuredParts = null
     this.injuryNature = null
     this.painLevel = null
+    this.authKey = null
     this.setHeaderTitle = function (headerTitle){
         this.headerTitle = headerTitle
     }
@@ -61,6 +62,12 @@ var service = function(rootScope) {
     }
     this.getPainLevel = function() {
         return this.painLevel;
+    }
+    this.setAuthKey = function(authKey) {
+        this.authKey = authKey;
+    }
+    this.getAuthKey = function(){
+        return this.authKey;
     }
 }
 

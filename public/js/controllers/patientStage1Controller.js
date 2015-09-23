@@ -1,7 +1,8 @@
-var DEPS = ['$scope', 'patientSvc', '$location', 'ngToast', 'fileReader'];
-var patientStage1Ctrl = function(scope, patientSvc, location, ngToast, fileReader) {
-    scope.viewOptions.headerTitle =  "Patient ID #1234"
-    scope.imageSrc = '../images/injured-person.jpg';
+var DEPS = ['$scope', 'patientSvc', '$location', 'ngToast', 'fileReader', 'patientProfileModel'];
+var patientStage1Ctrl = function(scope, patientSvc, location, ngToast, fileReader, patientProfileModel) {    
+    patientProfileModel.setHeaderTitle("Patient ID #1234")    
+    scope.viewOptions.headerTitle =  patientProfileModel.getHeaderTitle();
+    scope.imageSrc = '../images/injured-person.png';
     scope.onImageUpload = function($files){        
         waitingDialog.show('Uploading...');
         scope.image = $files[0];     
@@ -32,7 +33,7 @@ var patientStage1Ctrl = function(scope, patientSvc, location, ngToast, fileReade
         location.path("/consentForm");
     }
     scope.next = function(){        
-        location.path("/patientStage2");           
+        location.path("/patientStage2");        
     }
 }
 

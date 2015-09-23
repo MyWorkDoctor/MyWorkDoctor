@@ -1,6 +1,6 @@
-DEPS = ["$q", "$http", "$log"]
+DEPS = ["$q", "$http", "$log", "$upload"]
 
-var factory = function($q, $http, log) {
+var factory = function($q, $http, log, $upload) {
     var Patient = {
         baseUrl : function (){
             return "/";// http://49.238.48.45:3000/
@@ -83,9 +83,12 @@ var factory = function($q, $http, log) {
             var error = function (errMsg) {
                 return q.reject(errMsg)
             }
-            $http.post(this.uploadImageUrl(), props)
-                .success(success)
-                .error(error)
+            $upload.upload({
+                url: this.uploadImageUrl(),
+                data: props
+              })
+              .success(success)
+              .error(error)            
             return q.promise
         }
     }

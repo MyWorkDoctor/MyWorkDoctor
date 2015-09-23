@@ -1,9 +1,14 @@
-var DEPS = ['$scope', 'patientSvc', '$location', 'ngToast'];
-var patientStage1Ctrl = function(scope, patientSvc, location, ngToast) {
+var DEPS = ['$scope', 'patientSvc', '$location', 'ngToast', 'fileReader'];
+var patientStage1Ctrl = function(scope, patientSvc, location, ngToast, fileReader) {
     scope.viewOptions.headerTitle =  "Patient ID #1234"
+    scope.imageSrc = '../images/injured-person.jpg';
     scope.onImageUpload = function($files){        
         waitingDialog.show('Uploading...');
-        scope.image = $files[0]
+        scope.image = $files[0];     
+        fileReader.readAsDataUrl(scope.image, scope)
+            .then(function(result) {
+                scope.imageSrc = result;
+            });
         var obj = {
           "roomid":"55face502e6564a003329f35",
           "imagedata": scope.image

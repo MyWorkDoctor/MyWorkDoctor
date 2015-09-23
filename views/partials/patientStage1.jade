@@ -1,6 +1,6 @@
 .row
     .col-xs-12
-        img.img-responsive(src="../images/injured-person.jpg", alt="My Work Doctor Logo")    
+        img.img-responsive(src="{{imageSrc}}", alt="My Work Doctor Logo")    
     .col-xs-12.camera-nxt
         input.img-responsive(type="file", ng-file-select="onImageUpload($files)", style="display:none", id="patientImage", name="patientImage")
         img.img-responsive(src="../images/camera-icon.png", alt="My Work Doctor Logo", onClick="$('#patientImage').click()", style="cursor:pointer")

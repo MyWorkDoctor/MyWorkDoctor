@@ -1,14 +1,19 @@
 var DEPS = ['$scope', "$location", "$http", "patientSvc", "patientProfileModel"];
 var patientProfileCtrl = function(scope, location, http, patientSvc, patientProfileModel) {
-    scope.patient = {}
-    scope.patient.props = dummyData;
+    scope.patient = {}    
     scope.viewOptions.headerTitle =  patientProfileModel.getHeaderTitle();
     scope.reportIncident = function (patient) {
         if(patient.props.type == 'newpatient'){
             patientProfileModel.setNewPatient(true);
+            delete patient.props.id        
         } else if(patient.props.type == 'oldpatient'){
             patientProfileModel.setNewPatient(false);
+            delete patient.props.firstname
+            delete patient.props.lastname
+            delete patient.props.phone
+            delete patient.props.email            
         }
+        delete patient.props.type
         patientProfileModel.setPatientProfData(patient.props);
         patientProfileModel.setHeaderTitle("Consent Form");
         location.path("/consentForm");
@@ -26,9 +31,8 @@ var patientProfileCtrl = function(scope, location, http, patientSvc, patientProf
                 waitingDialog.show('Logging in');
                 patientLogin();
             }
-        }else {
-            location.path("/patientStage1")
-            // scope.viewOptions.errMsg = "You must accept the terms and conditions"
+        }else {            
+            scope.viewOptions.errMsg = "You must accept the terms and conditions"
         }    
     }
     var patientLogin = function (){        

@@ -1,11 +1,32 @@
-var DEPS = ['$scope', '$location'];
-var patientStage1Ctrl = function(scope, location) {
+var DEPS = ['$scope', 'patientSvc', '$location', 'ngToast'];
+var patientStage1Ctrl = function(scope, patientSvc, location, ngToast) {
     scope.viewOptions.headerTitle =  "Patient ID #1234"
+    scope.onImageUpload = function($files){        
+        waitingDialog.show('Uploading...');
+        scope.image = $files[0]
+        var obj = {
+          "roomid":"55face502e6564a003329f35",
+          "imagedata": scope.image
+        }
+        var success = function (response){
+            waitingDialog.hide();
+            // ngToast.create({
+            //     'horizontalPosition*':'left',
+            //     'verticalPosition*':'top',
+            //     'content':'Image Uploaded Successfully'
+            // });
+        }
+        var failure = function (errMsg){
+            waitingDialog.hide();
+            scope.viewOptions.errMsg = errMsg;
+        }
+        return patientSvc.uploadImage(obj)
+            .then(success, failure)        
+    }
     scope.previous = function(){
         location.path("/consentForm");
     }
-    scope.next = function(){
-        patientProfileModel.setHeaderTitle("Patient ID #1234");        
+    scope.next = function(){        
         location.path("/patientStage2");           
     }
 }

@@ -38,6 +38,7 @@ var patientProfileCtrl = function(scope, location, http, patientSvc, patientProf
     var patientLogin = function (){        
         var success = function (response){
             waitingDialog.hide();
+            patientProfileModel.setHeaderTitle("Patient ID #1234");
             location.path("/patientStage1")
         }
         var failure = function (errMsg){

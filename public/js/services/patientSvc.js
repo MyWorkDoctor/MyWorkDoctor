@@ -14,6 +14,9 @@ var factory = function($q, $http, log) {
         addQuestionsUrl : function(){
             return this.baseUrl() + "addQuestions";
         },
+        uploadImageUrl : function(){
+            return this.baseUrl() + "uploadImage";
+        },
         patientLogin : function (props) {
             var q = $q.defer();
             var success = function (svrResult) { 
@@ -63,6 +66,24 @@ var factory = function($q, $http, log) {
                 return q.reject(errMsg)
             }
             $http.post(this.addQuestionsUrl(), props)
+                .success(success)
+                .error(error)
+            return q.promise
+        },
+        uploadImage : function(props){
+            var q = $q.defer();
+            var success = function (svrResult) {
+                if(svrResult.error){
+                    error(svrResult.errordetails.error)
+                }else {
+                    return q.resolve(svrResult.response)
+                }
+                
+            }
+            var error = function (errMsg) {
+                return q.reject(errMsg)
+            }
+            $http.post(this.uploadImageUrl(), props)
                 .success(success)
                 .error(error)
             return q.promise

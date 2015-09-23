@@ -27,7 +27,7 @@ exports.addUser = function(req, res) {
 	}
 	console.log(req.body);
 	var params = {
-		login : req.body.firstname+'_'+req.body.lastname,
+		login : Date.now(),
 		password : password,
 		email : req.body.email,
 		full_name:req.body.firstname+" "+req.body.lastname,
@@ -38,10 +38,13 @@ exports.addUser = function(req, res) {
 		if (error) {
 			console.log(error);
 			res.send({
-				response : 'failed to Create USer....'
+				response:null,
+				error:true,
+				errordetails:error.detail
 			});
 		} else if (result) {
 			console.log(result);
+			if(result.id!=null && (result.id)>0){
 			var user = new User({
 				_id : result.id,
 				email : result.email,
@@ -55,16 +58,31 @@ exports.addUser = function(req, res) {
 			});
 			user.save(function(err,user){
 				 if(err){
-					 res.send({response:"User Registration Failed"});
+					 res.send({
+						 response:"User Registration Failed",
+						 error:true,
+						 errordetails:err
+						 });
 				 	console.log("Failed to insert...."+err);
 				 	removefromQB(QB1,result,res);
 				 }else{
 					 console.log(user);
-					 res.send({response:{user:user}});
-				} });			
+					 res.send({response:{user:user},
+						 error:false,
+						 errordetails:null});
+				} });
+			}else{
+				res.send({
+					response:null,
+					error:true,
+					 errordetails:{error:"User Registration Failed"}
+				});
+			}
 		} else {
 			res.send({
-				response : 'failed to Create'
+				response:null,
+				 error:true,
+				 errordetails:{error:"User Registration Failed"}
 			});
 		}
 	});
@@ -108,7 +126,11 @@ exports.login=function(req,res){
 	if(req.body.id!=null && req.body.id != 0){
 		User.find({_id:req.body.id},function(err,user){
 			if(err){
-				res.send({response:"Please Check the PatientID"});
+				res.send({
+					response:null,
+					 error:true,
+					 errordetails:{error:"Please Check the PatientID"}
+				});
 			}else if(user && user[0]){
 				console.log(user[0]); 
 				var roles=user[0].Roles;
@@ -138,32 +160,47 @@ exports.login=function(req,res){
 							if(err){
 								console.log(err);
 								//user.remove({_id:user[0]._id});
-								res.send({response:'Room Creation Failed/login Failed'});
+								res.send({
+									response:null,
+									 error:true,
+									 errordetails:err
+								});
 							}else if(room){
 								console.log(room);
 								var base64data=new Buffer(JSON.stringify(data)).toString('base64');
-								res.send({response:{token:base64data,room:room,login:user[0].login,password:user[0].password, success:true}});
+								res.send({
+									error:false,
+									errordetails:null,
+									response:{token:base64data,room:room,login:user[0].login,password:user[0].password, success:true}});
 							}else{
 								console.log("Room Creation Failed..");
-								res.send({response:'Room Creation Failed/login Failed'});
+								res.send({
+									response:null,
+									 error:true,
+									 errordetails:{error:"Room Creation Failed.."}
+								});
 							}
 						});
 					}else if(err){
 						console.log(err)
-						res.send({response:{token:"", success:false}});
-					}else{
-						res.send({response:{token:"", success:false}});
+						res.send({response:null,
+							error:true,
+							errordetails:err});
 					}
 				});
 				}
 			}else{
-				res.send({response:"Not A Valid Patient ID"});
+				res.send({response:null,
+					error:true,
+					errordetails:{error:"Not A Valid Patient ID"}});
 			}
 		});
 	}else if(req.body.username!=null && req.body.password!=null){
 		User.find({"$and":[{login:req.body.username},{password:req.body.password}]},function(err,user){
 			if(err){
-				res.send({response:"Please Check the username/password"});
+				res.send({response:null,
+					error:true,
+					errordetails:{error:"Please Check the username/password"}});
 			}else if(user && user[0]){
 				console.log(user[0]); 
 				var roles=user[0].Roles;
@@ -181,46 +218,24 @@ exports.login=function(req,res){
 					}
 					sess.user=data;
 					var base64data=new Buffer(JSON.stringify(data)).toString('base64');
-					res.send({response:{token:base64data, login:user[0].login,password:user[0].password,userid:user[0]._id,name:user[0].firstname+''+user[0].lastname, success:true}});
+					res.send({error:false,
+						errordetails:null,response:{token:base64data, login:user[0].login,password:user[0].password,userid:user[0]._id,name:user[0].firstname+''+user[0].lastname, success:true}});
 					}else if(err){
 						console.log(err);
-						res.send({response:{token:"", success:false}});
-					}else{
-						res.send({response:{token:"", success:false}});
+						res.send({response:null,
+							error:true,
+							errordetails:err});
 					}
 				});
 				}
 			}else{
-				res.send({response:"Not A Valid User"});
+				res.send({response:null,
+					error:true,
+					errordetails:{error:"Not A Valid User"}});
 			}
 		});
 	}
 };
-
-
-function createRoom(req, user){
-	var room=new Room({
-		name:req.body.reason,
-	topic: req.body.reason,
-	creator: user._id,
-	status:'open',
-	users:[user._id],
-	created_on:Date.now()
-	});
-	room.save(function(err,room){
-		console.log();
-		if(err){
-			console.log(err);
-			return null;
-		}else if(room){
-			console.log(room);
-			return room;
-		}else{
-			console.log("Room Creation Failed..");
-			return null;
-		}
-	});
-}
 
 
 
@@ -246,13 +261,20 @@ exports.addQuestion=function(req,res){
 		Room.update({_id:req.body.roomid},{$set:{questionare:req.body.Questions,updated_date:Date.now(),severity:req.body.severity}},function(err){
 			if(err){
 				console.log(err);
-				res.send({response:"Questionaire Adding Failed."});
+				res.send({response:null,
+					error:true,
+					errordetails:{error:"Questionaire Adding Failed."}});
+				
 			}else{
-				res.send({response:"Room Updated Succesfully."});
+				res.send({response:"Room Updated Succesfully.",
+					error:false,
+					errordetails:null});
 			}
 		});
 	}else{
-		res.send({response:"Not A valid User./session expired"});
+		res.send({response:null,
+			error:true,
+			errordetails:{error:"Not A valid User./session expired"}});
 	}
 };
 
@@ -264,16 +286,25 @@ exports.getRooms=function(req,res){
 		Room.find({status:'open'}, null, {sort: {created_on: -1}},function(err,rooms){
 			if(err){
 				console.log(err);
-				res.send({response:"error in fetching rooms"});
+				res.send({response:null,
+					error:true,
+					errordetails:{error:"error in fetching rooms"}});
 			}else if(rooms){ 
-				res.send(rooms);
+				res.send({response:rooms,
+					error:false,
+					errordetails:null});
 			}else{
-				res.send({response:"error in fetching rooms"});
+				res.send({response:null,
+					error:true,
+					errordetails:{error:"error in fetching rooms"}});
+				
 			}
 		});
 		
 	}else{
-		res.send({response:"Not a valid user/Your Session is expired..."});
+		res.send({response:null,
+			error:true,
+			errordetails:{error:"Not a valid user/Your Session is expired..."}});
 	}
 }
 
@@ -311,16 +342,22 @@ exports.getRoom=function(req,res){
 		Room.find({_id:req.body.roomid}, null, {sort: {created_on: -1}},function(err,rooms){
 			if(err){
 				console.log(err);
-				res.send({response:"error in fetching rooms"});
+				res.send({response:null,
+					error:true,
+					errordetails:{error:"error in fetching rooms"}});
 			}else if(rooms){ 
 				res.send(rooms[0]);
 			}else{
-				res.send({response:"error in fetching rooms"});
+				res.send({response:null,
+					error:true,
+					errordetails:{error:"error in fetching rooms"}});
 			}
 		});
 		
 	}else{
-		res.send({response:"Not a valid user/Your Session is expired..."});
+		res.send({response:null,
+			error:true,
+			errordetails:{error:"Not a valid user/Your Session is expired..."}});
 	}
 }
 
@@ -333,6 +370,9 @@ exports.addCalle=function(req,res){
 		Room.update({_id:req.body.roomid},{$addToSet:{users:user_id}},function(err){
 			if(err){
 				console.log(err);
+				res.send({response:null,
+					error:true,
+					errordetails:{error:"Not a valid user/Your Session is expired..."}});
 				res.send({response:"callee Adding Failed."});
 			}else{
 				Room.find({_id:req.body.roomid}, null, {sort: {created_on: -1}},function(err,rooms){

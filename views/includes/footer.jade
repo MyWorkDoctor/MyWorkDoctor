@@ -1,8 +1,8 @@
 .row
     .nxt-bck-btns        
-        input.img-responsive.bck-btn(type='image', src="./images/back-btn.png", alt="Previous", ng-click="previous()")
+        input.img-responsive.bck-btn(type='image', src="./images/back-btn.png", alt="Previous", ng-click="previous(prevUrl)")
         block next-btn
-            input.img-responsive.nxt-btn(type='image', src="./images/next-btn.png", name='submit', alt="Next", ng-click="next()")
+            input.img-responsive.nxt-btn(type='image', src="./images/next-btn.png", name='submit', alt="Next", ng-click="next(nxtUrl, pageNo)")
 .row
     .col-xs-12
         img.img-responsive(src="../images/my-work-doc-logo.png", alt="My Work Doctor Logo")           

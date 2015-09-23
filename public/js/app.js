@@ -6,11 +6,11 @@ var routeConfig = function (routeProvider, locationProvider){
     routeProvider
     .when('/home', {
         templateUrl: 'partials/home',
-        controller: 'homeCtrl'
+        controller: 'patientProfileCtrl'
     })
     .when('/consentForm', {
         templateUrl: 'partials/consentForm',
-        controller: 'consentFormCtrl'
+        controller: 'patientProfileCtrl'
     })
     .when('/patientStage1', {
         templateUrl: 'partials/patientStage1',
@@ -18,15 +18,15 @@ var routeConfig = function (routeProvider, locationProvider){
     })
     .when('/patientStage2', {
         templateUrl: 'partials/patientStage2',
-        controller: 'patientStage2Ctrl'
+        controller: 'patientQueryCtrl'
     })
     .when('/patientStage3', {
         templateUrl: 'partials/patientStage3',
-        controller: 'patientStage3Ctrl'
+        controller: 'patientQueryCtrl'
     })
     .when('/patientStage4', {
         templateUrl: 'partials/patientStage4',
-        controller: 'patientStage4Ctrl'
+        controller: 'patientQueryCtrl'
     })
     .when('/patientStage5', {
         templateUrl: 'partials/patientStage5',

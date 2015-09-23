@@ -5,6 +5,7 @@ var patientStage1Ctrl = function(scope, location) {
         location.path("/consentForm");
     }
     scope.next = function(){
+        patientProfileModel.setHeaderTitle("Patient ID #1234");        
         location.path("/patientStage2");           
     }
 }

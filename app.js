@@ -22,7 +22,6 @@ var app = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
-app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'jade');
 //app.set('view engine', 'jade');
 app.use(cookieParser());
@@ -52,6 +51,8 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
+
+//apis
 app.get('/visitor',routes.index)
 app.get('/provider',routes.index)
 app.get('/users', user.list);
@@ -69,6 +70,7 @@ app.post('/getRoom', user.getRoom);
 
 
 app.post('/Addcallee',user.addCalle)
+
 app.get('*', routes.index);
 http.createServer(app).listen(app.get('port'), function() {
 	console.log('Express server listening on port ' + app.get('port'));

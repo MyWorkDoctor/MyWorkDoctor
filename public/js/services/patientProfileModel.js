@@ -77,7 +77,10 @@ var service = function(rootScope) {
     this.getPatientId = function(){
         return this.patientId;
     }
-    this.setUploadImageCount = function(){
+    this.incrementUploadImageCount = function(){
+        this.uploadImageCount++;
+    }
+    this.decrementUploadImageCount = function(){
         this.uploadImageCount++;
     }
     this.getUploadImageCount = function(){

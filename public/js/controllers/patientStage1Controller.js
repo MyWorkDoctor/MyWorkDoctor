@@ -10,14 +10,14 @@ var patientStage1Ctrl = function(scope, patientSvc, location, fileReader, patien
             .then(function(result) {
                 scope.imageSrc = result;
             });
+        patientProfileModel.incrementUploadImageCount();
         var obj = {
           "roomid":patientProfileModel.getRoomId(),
           "imagedata": base64.encode(scope.image),
           "imageno": patientProfileModel.getUploadImageCount()
         }
         var success = function (response){
-            waitingDialog.hide();
-            patientProfileModel.setUploadImageCount();
+            waitingDialog.hide();            
             scope.imageUploadSuccess = true;
             $timeout(function(){
                 scope.imageUploadSuccess = false;
@@ -30,6 +30,7 @@ var patientStage1Ctrl = function(scope, patientSvc, location, fileReader, patien
         }
         var failure = function (errMsg){
             waitingDialog.hide();
+            patientProfileModel.decrementUploadImageCount();
             scope.viewOptions.errMsg = errMsg;
         }
         return patientSvc.uploadImage(obj)

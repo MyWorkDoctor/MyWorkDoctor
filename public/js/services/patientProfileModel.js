@@ -11,6 +11,7 @@ var service = function(rootScope) {
     this.roomId = null
     this.patientId = null
     this.uploadImageCount = 0
+    this.appSession = false
     this.setHeaderTitle = function (headerTitle){
         this.headerTitle = headerTitle
     }
@@ -85,6 +86,12 @@ var service = function(rootScope) {
     }
     this.getUploadImageCount = function(){
         return this.uploadImageCount;
+    }
+    this.setAppSession = function(appSession){
+        this.appSession = appSession
+    }
+    this.isAppSession = function(){
+        return this.appSession
     }
 }
 

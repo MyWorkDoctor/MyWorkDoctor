@@ -11,6 +11,7 @@ var patientProfileCtrl = function(scope, location, http, patientSvc, patientProf
         delete patient.props.type
         patientProfileModel.setPatientProfData(patient.props);
         patientProfileModel.setHeaderTitle("Consent Form");
+        patientProfileModel.setAppSession = true;
         location.path("/consentForm");
     }    
     scope.previous = function(){

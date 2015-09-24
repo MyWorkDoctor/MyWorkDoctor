@@ -1,6 +1,9 @@
-var DEPS = ['$scope'];
-var appCtrl = function(scope) {
+var DEPS = ['$scope', 'patientProfileModel', '$location'];
+var appCtrl = function(scope, patientProfileModel, location) {
     scope.viewOptions = {}
+    if(patientProfileModel.isAppSession){
+        location.path("/");
+    }
 }
 
 appCtrl.$inject = DEPS;

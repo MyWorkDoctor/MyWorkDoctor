@@ -56,7 +56,7 @@ var patientProfileCtrl = function(scope, location, http, patientSvc, patientProf
     }
     var createPatient = function (){
         var success = function (response){
-            var patientId = response.user.login;
+            var patientId = response.user._id;
             var reason = patientProfileModel.getPatientProfData().reason;            
             var obj = {
               "id": patientId,
@@ -89,5 +89,5 @@ var dummyData = {
     "phone" : 9177346796,
     "type" : "newpatient",
     "email" : "hemanth3697@gmail.com",
-    "id" : "sandeep1"
+    "id" : "5576391"
 }

@@ -1,5 +1,5 @@
 body { 
-    padding-top: 70px; 
+    padding-top: 70px;    
 }
 p, label{
     margin: 0;
@@ -24,7 +24,7 @@ input[type=checkbox], input[type=radio] {
     margin: 0 auto;
 }
 .patient-form{
-    background-color: rgb(108, 156, 202);
+    background: url('../images/screen-bg.png') 100% 100%;
     padding-top: 15px;
     padding-bottom: 15px;
 }

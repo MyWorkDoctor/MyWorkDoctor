@@ -40,7 +40,7 @@ var patientProfileCtrl = function(scope, location, http, patientSvc, patientProf
             patientProfileModel.setPatientId(patientId);            
             patientProfileModel.setAuthKey(token);
             patientProfileModel.setRoomId(roomId);
-            patientProfileModel.setHeaderTitle(patientId);
+            patientProfileModel.setHeaderTitle("Patient ID "+patientId);
             location.path("/patientStage1")
         }
         var failure = function (errMsg){

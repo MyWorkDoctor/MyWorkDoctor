@@ -3,19 +3,7 @@ var patientStage1Ctrl = function(scope, patientSvc, location, fileReader, patien
     scope.viewOptions.headerTitle =  patientProfileModel.getHeaderTitle();
     scope.imageSrc = '../images/injured-person.png';
     scope.imageUploadSuccess = false;
-    scope.onImageUpload = function($files){        
-        waitingDialog.show('Uploading...');
-        scope.image = $files[0];     
-        fileReader.readAsDataUrl(scope.image, scope)
-            .then(function(result) {
-                scope.imageSrc = result;
-            });
-        patientProfileModel.incrementUploadImageCount();
-        var obj = {
-          "roomid":patientProfileModel.getRoomId(),
-          "imagedata": base64.encode(scope.image),
-          "imageno": patientProfileModel.getUploadImageCount()
-        }
+    scope.onImageUpload = function($files){
         var success = function (response){
             waitingDialog.hide();            
             scope.imageUploadSuccess = true;
@@ -32,9 +20,21 @@ var patientStage1Ctrl = function(scope, patientSvc, location, fileReader, patien
             waitingDialog.hide();
             patientProfileModel.decrementUploadImageCount();
             scope.viewOptions.errMsg = errMsg;
-        }
-        return patientSvc.uploadImage(obj)
-            .then(success, failure)        
+        }      
+        waitingDialog.show('Uploading...');
+        scope.image = $files[0];     
+        fileReader.readAsDataUrl(scope.image, scope)
+            .then(function(result) {
+                scope.imageSrc = result;
+                patientProfileModel.incrementUploadImageCount();
+                var obj = {
+                  "roomid":patientProfileModel.getRoomId(),
+                  "imagedata": scope.imageSrc,
+                  "imageno": patientProfileModel.getUploadImageCount()
+                }
+                patientSvc.uploadImage(obj)
+                    .then(success, failure)
+            });
     }    
     scope.next = function(){        
         location.path("/patientStage2");        

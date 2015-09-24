@@ -1,6 +1,6 @@
-var DEPS = ['$scope', '$location'];
-var patientStage5Ctrl = function(scope, location) {
-    scope.viewOptions.headerTitle =  "Patient ID #1234"
+var DEPS = ['$scope', '$location', 'patientProfileModel'];
+var patientStage5Ctrl = function(scope, location, patientProfileModel) {
+    scope.viewOptions.headerTitle =  patientProfileModel.getHeaderTitle();
     scope.previous = function(){
         location.path("/patientStage4");
     }

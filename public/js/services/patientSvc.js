@@ -83,14 +83,11 @@ var factory = function($q, $http, log, $upload, patientProfileModel) {
             }
             var error = function (errMsg) {
                 return q.reject(errMsg)
-            }
-            $upload.upload({
-                url: this.uploadImageUrl(),
-                data: props,
-                headers: {'Auth': patientProfileModel.getAuthKey()}
-              })
-              .success(success)
-              .error(error)            
+            }            
+            $http.post(this.uploadImageUrl(), props, { 
+                headers: {'Auth': patientProfileModel.getAuthKey()}})
+                .success(success)
+                .error(error)         
             return q.promise
         }
     }

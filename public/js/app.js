@@ -1,13 +1,13 @@
 var myWorkDoc = angular.module('MyWorkDoc', [
     'ngRoute',
-    'angularFileUpload',
-    'ngToast',
-    'webcam'
+    'angularFileUpload',    
+    'webcam',
+    'base64'
 ]);
 var DEPS = ['$routeProvider', "$locationProvider"]
 var routeConfig = function (routeProvider, locationProvider){        
     routeProvider
-    .when('/home', {
+    .when('/', {
         templateUrl: 'partials/home',
         controller: 'patientProfileCtrl'
     })
@@ -44,7 +44,7 @@ var routeConfig = function (routeProvider, locationProvider){
         controller: 'patientStage7Ctrl'
     })
     .otherwise({
-        redirectTo: "/home"
+        redirectTo: "/"
     });
 
     locationProvider.html5Mode({
@@ -55,3 +55,4 @@ var routeConfig = function (routeProvider, locationProvider){
 
 routeConfig.$inject = DEPS;
 myWorkDoc.config(routeConfig);
+myWorkDoc.constant("ERR_TIME_OUT", 4000)

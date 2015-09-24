@@ -5,13 +5,8 @@ var patientProfileCtrl = function(scope, location, http, patientSvc, patientProf
     scope.reportIncident = function (patient) {
         if(patient.props.type == 'newpatient'){
             patientProfileModel.setNewPatient(true);
-            delete patient.props.id        
         } else if(patient.props.type == 'oldpatient'){
             patientProfileModel.setNewPatient(false);
-            delete patient.props.firstname
-            delete patient.props.lastname
-            delete patient.props.phone
-            delete patient.props.email            
         }
         delete patient.props.type
         patientProfileModel.setPatientProfData(patient.props);

@@ -117,7 +117,39 @@ exports.getUser = function(req, res) {
 
 
 exports.uploadImage=function(req,res){
-	res.send({response:"Image Uploaded"});
+	sess=req.session;
+	console.log(req);
+	var result=validateHeader(req);
+	if(result=='Visitor'){
+		var roomid=req.body.roomid;
+		if(roomid!=null && req.body.imageno<=4){
+		var fs = require("fs");
+		var dir='./public/images/'+roomid;
+		if (!fs.existsSync(dir)){
+		   fs.mkdirSync(dir);
+		}
+		require("fs").writeFile(dir+"/"+Date.now()+".jpg",req.body.imagedata, 'base64', function(err) {
+			if(err){
+				 res.send({response:null,
+			   		 error:true,
+			   		 errordetails:err});
+			}else{
+		   	 console.log('succesfully inserted');
+		   	 res.send({response:"uploaded succesfully",
+		   		 error:false,
+		   		 errordetails:null});
+		   	 }
+		 });
+		}else{
+			res.send({response:null,
+		   		 error:true,
+		   		 errordetails:{error:"please specify room"}});
+		}
+	}else{
+		 res.send({response:null,
+	   		 error:true,
+	   		 errordetails:{error:"session is expired..."}})
+	}
 };
 
 

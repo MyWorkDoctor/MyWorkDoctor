@@ -1,7 +1,8 @@
-var DEPS = ['$scope', 'patientSvc', '$location', 'ngToast', 'fileReader', 'patientProfileModel'];
-var patientStage1Ctrl = function(scope, patientSvc, location, ngToast, fileReader, patientProfileModel) {    
+var DEPS = ['$scope', 'patientSvc', '$location', 'fileReader', 'patientProfileModel', '$base64', "$timeout", 'ERR_TIME_OUT'];
+var patientStage1Ctrl = function(scope, patientSvc, location, fileReader, patientProfileModel, base64, $timeout, ERR_TIME_OUT) {    
     scope.viewOptions.headerTitle =  patientProfileModel.getHeaderTitle();
     scope.imageSrc = '../images/injured-person.png';
+    scope.imageUploadSuccess = false;
     scope.onImageUpload = function($files){        
         waitingDialog.show('Uploading...');
         scope.image = $files[0];     
@@ -11,10 +12,16 @@ var patientStage1Ctrl = function(scope, patientSvc, location, ngToast, fileReade
             });
         var obj = {
           "roomid":patientProfileModel.getRoomId(),
-          "imagedata": scope.image
+          "imagedata": base64.encode(scope.image),
+          "imageno": patientProfileModel.getUploadImageCount()
         }
         var success = function (response){
             waitingDialog.hide();
+            patientProfileModel.setUploadImageCount();
+            scope.imageUploadSuccess = true;
+            $timeout(function(){
+                scope.imageUploadSuccess = false;
+            }, ERR_TIME_OUT)           
             // ngToast.create({
             //     'horizontalPosition*':'left',
             //     'verticalPosition*':'top',
@@ -27,12 +34,16 @@ var patientStage1Ctrl = function(scope, patientSvc, location, ngToast, fileReade
         }
         return patientSvc.uploadImage(obj)
             .then(success, failure)        
-    }
-    scope.previous = function(){
-        location.path("/consentForm");
-    }
+    }    
     scope.next = function(){        
         location.path("/patientStage2");        
+    }
+    scope.imageUpload = function(){
+        if(patientProfileModel.getUploadImageCount() > 4){
+            scope.viewOptions.errMsg = "You can upload maximum of 4 photos";
+            return;
+        }
+        $('#patientImage').click()
     }
 }
 

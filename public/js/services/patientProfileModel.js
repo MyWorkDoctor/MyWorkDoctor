@@ -10,6 +10,7 @@ var service = function(rootScope) {
     this.authKey = null
     this.roomId = null
     this.patientId = null
+    this.uploadImageCount = 0
     this.setHeaderTitle = function (headerTitle){
         this.headerTitle = headerTitle
     }
@@ -75,6 +76,12 @@ var service = function(rootScope) {
     }
     this.getPatientId = function(){
         return this.patientId;
+    }
+    this.setUploadImageCount = function(){
+        this.uploadImageCount++;
+    }
+    this.getUploadImageCount = function(){
+        return this.uploadImageCount;
     }
 }
 

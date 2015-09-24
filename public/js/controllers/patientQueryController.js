@@ -70,6 +70,8 @@ var patientQueryCtrl = function(scope, location, log, filter, patientSvc, patien
                 var injuryNature = getValuesArray(patientProfileModel.getInjuryNature().listedInjuryNature);
                 
                 var obj = {
+                    "roomid": patientProfileModel.getRoomId(),
+                    "user_id" : patientProfileModel.getPatientId(),
                     "Questions":[ 
                         {
                             "Question" : "What is the Nature of injury?",

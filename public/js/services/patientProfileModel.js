@@ -4,11 +4,12 @@ var service = function(rootScope) {
     this.patientProfData = null;
     this.headerTitle = "Welcome";
     this.newPatient = null;
-    this.username = null;
     this.injuredParts = null
     this.injuryNature = null
     this.painLevel = null
     this.authKey = null
+    this.roomId = null
+    this.patientId = null
     this.setHeaderTitle = function (headerTitle){
         this.headerTitle = headerTitle
     }
@@ -26,12 +27,6 @@ var service = function(rootScope) {
     }
     this.isNewPatient = function (){
         return this.newPatient
-    }
-    this.setUsername = function (username){
-        this.username = username; 
-    }   
-    this.getUsername = function (){
-        return this.username;
     }
     this.setInjuredParts = function (injuredParts){
         this.injuredParts = injuredParts
@@ -68,6 +63,18 @@ var service = function(rootScope) {
     }
     this.getAuthKey = function(){
         return this.authKey;
+    }
+    this.setRoomId = function(roomId) {
+        this.roomId = roomId;
+    }
+    this.getRoomId = function(){
+        return this.roomId;
+    }
+    this.setPatientId = function(patientId) {
+        this.patientId = patientId;
+    }
+    this.getPatientId = function(){
+        return this.patientId;
     }
 }
 

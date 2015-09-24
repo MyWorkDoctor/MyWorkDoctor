@@ -1,5 +1,6 @@
 .row
     .col-xs-12
+        //- webcam(on-stream="onStream(stream)", on-access-denied="onError(err)", on-streaming="onSuccess()", placeholder="'./images/ajax-loading.gif'")
         img.img-responsive(src="{{imageSrc}}", alt="My Work Doctor Logo")    
     .col-xs-12.camera-nxt
         input.img-responsive(type="file", ng-file-select="onImageUpload($files)", style="display:none", id="patientImage", name="patientImage")

@@ -38,7 +38,13 @@ var patientProfileCtrl = function(scope, location, http, patientSvc, patientProf
     var patientLogin = function (){        
         var success = function (response){
             waitingDialog.hide();
-            patientProfileModel.setHeaderTitle("Patient ID #1234");
+            var token = response.token;
+            var roomId = response.room._id;
+            var patientId = patientProfileModel.getPatientProfData().id
+            patientProfileModel.setPatientId(patientId);            
+            patientProfileModel.setAuthKey(token);
+            patientProfileModel.setRoomId(roomId);
+            patientProfileModel.setHeaderTitle(patientId);
             location.path("/patientStage1")
         }
         var failure = function (errMsg){
@@ -50,10 +56,14 @@ var patientProfileCtrl = function(scope, location, http, patientSvc, patientProf
     }
     var createPatient = function (){
         var success = function (response){
-            var username = response.user.login;
-            var password = response.user.password;
-            patientProfileModel.setUsername(username);
-            patientLogin(username, password);
+            var patientId = response.user.login;
+            var reason = patientProfileModel.getPatientProfData().reason;            
+            var obj = {
+              "id": patientId,
+              "reason": reason
+            }
+            patientProfileModel.setPatientProfData(obj);
+            patientLogin();
         }
         var failure = function (errMsg){
             waitingDialog.hide();

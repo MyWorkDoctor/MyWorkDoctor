@@ -1,6 +1,6 @@
 .row(ng-init="prevUrl='/patientStage1';nxtUrl='/patientStage3';pageNo=2")
     .col-xs-12
-        h3 What part of your body is injured?
+        h3 What is the nature of injury?
 .row(ng-repeat="item in injuryPartsList") 
     input.pull-left.injury-type(type='checkbox', name="{{item.value}}", id="{{item.value}}", checkbox-group, checked-list="injuryPartsCheckedList", item="item")
     label.injury-multi-select(for='{{item.value}}', ng-bind="item.value")

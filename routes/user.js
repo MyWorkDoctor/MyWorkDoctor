@@ -296,8 +296,7 @@ exports.getRooms=function(req,res){
 			}else{
 				res.send({response:null,
 					error:true,
-					errordetails:{error:"error in fetching rooms"}});
-				
+					errordetails:{error:"error in fetching rooms"}});				
 			}
 		});
 		
@@ -372,23 +371,32 @@ exports.addCalle=function(req,res){
 				console.log(err);
 				res.send({response:null,
 					error:true,
-					errordetails:{error:"Not a valid user/Your Session is expired..."}});
-				res.send({response:"callee Adding Failed."});
+					errordetails:{error:"callee Adding Failed."}});
 			}else{
 				Room.find({_id:req.body.roomid}, null, {sort: {created_on: -1}},function(err,rooms){
 					if(err){
 						console.log(err);
-						res.send({response:"error in fetching rooms"});
+						res.send({response:null,
+							error:true,
+							errordetails:{error:"error in fetching rooms."}});						
 					}else if(rooms){ 
+						res.send({response:rooms[0],
+							error:false,
+							errordetails:null});	
 						res.send(rooms[0]);
 					}else{
-						res.send({response:"error in fetching rooms"});
+						res.send({response:null,
+							error:true,
+							errordetails:{error:"No rooms found"}});
 					}
 				});
 			}
 		});
 		
 	}else{
-		res.send({response:"Not a valid user/Your Session is expired..."});
+		res.send({response:null,
+			error:true,
+			errordetails:{error:"Not a valid user/Your Session is expired..."}})
+		
 	}
 }

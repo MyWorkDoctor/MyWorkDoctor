@@ -1,6 +1,5 @@
 var DEPS = ['$scope', 'patientSvc', '$location', 'ngToast', 'fileReader', 'patientProfileModel'];
 var patientStage1Ctrl = function(scope, patientSvc, location, ngToast, fileReader, patientProfileModel) {    
-    patientProfileModel.setHeaderTitle("Patient ID #1234")    
     scope.viewOptions.headerTitle =  patientProfileModel.getHeaderTitle();
     scope.imageSrc = '../images/injured-person.png';
     scope.onImageUpload = function($files){        
@@ -11,7 +10,7 @@ var patientStage1Ctrl = function(scope, patientSvc, location, ngToast, fileReade
                 scope.imageSrc = result;
             });
         var obj = {
-          "roomid":"55face502e6564a003329f35",
+          "roomid":patientProfileModel.getRoomId(),
           "imagedata": scope.image
         }
         var success = function (response){
@@ -39,3 +38,17 @@ var patientStage1Ctrl = function(scope, patientSvc, location, ngToast, fileReade
 
 patientStage1Ctrl.$inject = DEPS;
 myWorkDoc.controller('patientStage1Ctrl', patientStage1Ctrl);
+// if(webcam.getCameraList().length == 0){  
+//    alert('You don\'t have a web camera');  
+// }
+
+// navigator.getMedia = ( navigator.getUserMedia || // use the proper vendor prefix
+//                        navigator.webkitGetUserMedia ||
+//                        navigator.mozGetUserMedia ||
+//                        navigator.msGetUserMedia);
+
+// navigator.getMedia({video: true}, function() {
+//   // webcam is available
+// }, function() {
+//   // webcam is not available
+// });

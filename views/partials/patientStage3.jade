@@ -1,6 +1,6 @@
 .row(ng-init="prevUrl='/patientStage2';nxtUrl='/patientStage4';pageNo=3")
     .col-xs-12
-        h3 What is the nature of injury?
+        h3 What part of your body is injured?
 .row(ng-repeat="item in injuryNatureList") 
     .col-xs-4(ng-if="item.value != 'Leg' && item.value != 'Foot' && item.value != 'Hand'")
         input.pull-left.body-part-type(type='checkbox', name="{{item.value}}", id="{{item.value}}", checkbox-group, checked-list="injuryNatureCheckedList", item="item")

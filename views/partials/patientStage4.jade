@@ -60,15 +60,16 @@ p.error {{viewOptions.errMsg}}
         span 0
     .col-xs-10
         .progress-scale
-            img(src="../images/progress-bar-bottom-bg.png", alt="My Work Doctor Logo")
+            .progress-main
+                img.img-responsive(src="../images/progress-bar-bottom-bg.png", alt="My Work Doctor Logo")
+                .progress-bar-wrapper
+                    .progress
+                      .progress-bar.progress-bar-warning(role='progressbar', aria-valuenow='{{painLevel*10}}', aria-valuemin='0', aria-valuemax='100', style='width: {{painLevel*10}}%')
+                        span.sr-only 60% Complete (warning)
             .progress-smileys
                 img(src="../images/face-icon-red.png", alt="My Work Doctor Logo")
                 img(src="../images/face-icon-yellow.png", alt="My Work Doctor Logo")
                 img(src="../images/face-icon-green.png", alt="My Work Doctor Logo")
-            .progress-bar-warpper
-                .progress
-                  .progress-bar.progress-bar-warning(role='progressbar', aria-valuenow='{{painLevel*10}}', aria-valuemin='0', aria-valuemax='100', style='width: {{painLevel*10}}%')
-                    span.sr-only 60% Complete (warning)
     .col-xs-1.max-scale 
         span 10
 include ../includes/footer 

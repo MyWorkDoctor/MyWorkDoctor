@@ -1,7 +1,8 @@
 var myWorkDoc = angular.module('MyWorkDoc', [
     'ngRoute',
     'angularFileUpload',
-    'ngToast'
+    'ngToast',
+    'webcam'
 ]);
 var DEPS = ['$routeProvider', "$locationProvider"]
 var routeConfig = function (routeProvider, locationProvider){        

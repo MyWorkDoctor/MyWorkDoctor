@@ -167,7 +167,7 @@ input[type=checkbox], input[type=radio] {
     position: relative;
 }
 .progress-smileys{
-    padding-top: 5px;
+    padding: 5px 20px;
 }
 .progress-smileys > img:first-child {
     float: right;
@@ -188,7 +188,10 @@ input[type=checkbox], input[type=radio] {
     text-align: center;
     font-size: 20px;
 }
-.progress-bar-warpper{
+.progress-main{
+    position: relative;
+}
+.progress-bar-wrapper{
     position: absolute;
     top: 17px;
     left: 0;

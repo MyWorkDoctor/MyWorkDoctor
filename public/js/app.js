@@ -1,7 +1,6 @@
 var myWorkDoc = angular.module('MyWorkDoc', [
     'ngRoute',
-    'angularFileUpload',    
-    'webcam',
+    'angularFileUpload',
     'base64'
 ]);
 var DEPS = ['$routeProvider', "$locationProvider"]
@@ -56,3 +55,18 @@ var routeConfig = function (routeProvider, locationProvider){
 routeConfig.$inject = DEPS;
 myWorkDoc.config(routeConfig);
 myWorkDoc.constant("ERR_TIME_OUT", 4000)
+myWorkDoc.constant("QUICK_BLOX_CONFIG", {
+  appId: 27840,
+  authKey: 'q5tEFx9BOa2G2Lg',
+  authSecret: 'OuR85fgtxZ6eDn7',
+  options : {
+      chatProtocol: {
+        active: 2,
+      },
+      debug: true,
+      webrtc: {
+        answerTimeInterval: 60,
+        dialingTimeInterval: 5
+      }
+    }
+});

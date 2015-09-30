@@ -1,11 +1,14 @@
 body { 
-    padding-top: 70px;    
+    padding-top: 52px;    
 }
 p, label{
     margin: 0;
 }
 input[type=checkbox], input[type=radio] {
     display: none;
+}
+input[type=checkbox] + label, input[type=radio] + label {
+    padding-left: 15px;
 }
 .navbar-brand {
     float:none;    
@@ -23,10 +26,16 @@ input[type=checkbox], input[type=radio] {
 .img-responsive{
     margin: 0 auto;
 }
-.patient-form{
-    background: url('../images/screen-bg.png') 100% 100%;
+.middle-container{    
+    margin: 0 auto;
+    float: none;
+}
+.patient-form{    
     padding-top: 15px;
-    padding-bottom: 15px;
+    padding-bottom: 15px;    
+}
+.container-top-spacing {
+    padding-top: 10px;
 }
 .radio, .checkbox, .injury-multi-select, .body-part-multi-select, .pain-level-select {
     position: relative;
@@ -42,9 +51,7 @@ input[type=checkbox], input[type=radio] {
     color: #999;    
 }
 .checkbox, .injury-multi-select, .body-part-multi-select, .pain-level-select {
-    display: inline;
-    padding-left: 30px;
-    margin-left: 10px;
+    display: inline;    
     font-size: 18px;
 }
 .radio::before, .pain-level-select::before {
@@ -74,7 +81,7 @@ input[type=checkbox], input[type=radio] {
     right: 0;
 }
 .checkbox::before, .injury-multi-select::before, .body-part-multi-select::before, .pain-level-select::before {
-    left: 0;
+    left: -10px;
 }
 .pain-level:checked + .pain-level-select::before,
 .body-part-type:checked + .body-part-multi-select::before,
@@ -86,8 +93,16 @@ input[type=checkbox], input[type=radio] {
     background-position: center top;
     background-repeat: no-repeat;
 }
+.accept + label {
+    color: #ffffff;    
+}
 .injury-type:checked + .injury-multi-select::before, .pain-level:checked + .pain-level-select::before {
     background-image: url('../images/radio-checked.png');
+}
+.background-screen{
+    background-image: url('../images/screen-bg.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 .help-text {
     color: #fff;
@@ -101,8 +116,18 @@ input[type=checkbox], input[type=radio] {
     color: red;
 }
 .terms {
-    max-height: 100px;
-    overflow-y: auto;
+    height: 250px;
+    position: relative;
+}
+.terms object{    
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+.terms object embed {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
 }
 .nxt-bck-btns{
     display: table;
@@ -135,31 +160,30 @@ input[type=checkbox], input[type=radio] {
 }
 .radio-btn-grp {
     text-align: center;
+    padding: 0;
+}
+.radio-btn-grp > label {
+    padding-left: 0 !important;
 }
 .pain-level-scale{
     margin: 0 auto;
 }
 .max-scale {
-    text-align: left;    
+    text-align: left;
+    padding: 0;
 }
 .min-scale {
     text-align: right;
+    padding: 0;
 }
 .progress-wrapper{
     margin-top: 10px;    
     margin-bottom: 10px;
 }
-.progress-wrapper > div:first-child , .progress-wrapper > div:last-child {
-    display: table;
-    height: 100%;
-}
-.progress-wrapper > div > span {
-    display: table-cell;
-    vertical-align: middle;
+.progress-wrapper > div > span {    
     color: #b03060;
     font-size: 18px;
-    line-height: 18px;
-    padding-top: 10px;
+    line-height: 32px;
 }
 .progress-scale{    
     display: table;
@@ -167,7 +191,7 @@ input[type=checkbox], input[type=radio] {
     position: relative;
 }
 .progress-smileys{
-    padding: 5px 20px;
+    padding: 5px 10px;
 }
 .progress-smileys > img:first-child {
     float: right;
@@ -193,18 +217,81 @@ input[type=checkbox], input[type=radio] {
 }
 .progress-bar-wrapper{
     position: absolute;
-    top: 17px;
+    top: 6px;
     left: 0;
     right: 0;
     margin: 0 auto;
-    width: 90%;
+    width: 95%;
 }
 .progress {
-    background: rgba(255, 255, 255, 1); border: 0px solid rgba(245, 245, 245, 1);border-radius: 10px; height: 20px;
+    background: rgba(255, 255, 255, 1); border: 0px solid rgba(245, 245, 245, 1);border-radius: 10px; height: 16px;
 }
 .progress-bar-custom {
     background: rgba(196, 106, 33, 1); background: -webkit-linear-gradient(top, rgba(245, 182, 88, 1) 0%, rgba(196, 106, 33, 1) 100%); background: linear-gradient(to bottom, rgba(245, 182, 88, 1) 0%, rgba(196, 106, 33, 1) 100%);
 }
 .error {
     color: red;
+}
+.video-content-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;    
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.footer{
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    left: 0;
+    background: rgba(97,97,97,1);
+    background: -moz-linear-gradient(top, rgba(97,97,97,1) 0%, rgba(31,31,31,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(97,97,97,1)), color-stop(100%, rgba(31,31,31,1)));
+    background: -webkit-linear-gradient(top, rgba(97,97,97,1) 0%, rgba(31,31,31,1) 100%);
+    background: -o-linear-gradient(top, rgba(97,97,97,1) 0%, rgba(31,31,31,1) 100%);
+    background: -ms-linear-gradient(top, rgba(97,97,97,1) 0%, rgba(31,31,31,1) 100%);
+    background: linear-gradient(to bottom, rgba(97,97,97,1) 0%, rgba(31,31,31,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#616161', endColorstr='#1f1f1f', GradientType=0 );
+}
+.footer-container{
+    /*display: table-cell;*/
+}
+.video-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;    
+}
+.video-wrapper video {
+    width: 100%;
+    height: 100%;
+}
+.videos-small-wrapper{
+    overflow: auto;
+    position: absolute;
+    bottom: 50px;
+    top: 50px;
+}
+.video-small{
+    width: 150px;
+    height: 150px;    
+    margin: 10px auto;
+}
+.videos-left{
+    left: 0;
+}
+.videos-right{
+    right: 0;
+}
+.videos-container > .video-small > video{
+    width: 100%;
+    height: 100%;
+}
+.pain-level-selection-wrapper{
+    display: table;
+    margin: 0 auto;
+    width: 100%;
 }

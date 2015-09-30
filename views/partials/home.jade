@@ -1,42 +1,43 @@
-.row
+.row.background-screen
     .col-xs-12
-        img.img-responsive(src="../images/my-work-doc-logo.png", alt="My Work Doctor Logo")
-.row
-    form(role="form", ng-init="patient.props.type='newpatient'", novalidate, name="patientForm")
-        .col-xs-12.patient-form
-            .form-group(ng-if="patient.props.type == 'newpatient'")
-                input.form-control(type='text', name='firstname', placeholder='First Name', required, ng-model="patient.props.firstname")
-                span.msg-error(ng-show='patientForm.firstname.$error.required && patientForm.firstname.$dirty') Please enter first name
-            .form-group(ng-if="patient.props.type == 'newpatient'")           
-                input.form-control(type='text', name='lastname', placeholder='Last Name', required, ng-model="patient.props.lastname")
-                span.msg-error(ng-show='patientForm.lastname.$error.required && patientForm.lastname.$dirty') Please enter last name                    
-            .form-group                  
-                input.form-control(type='text', name='reason', placeholder='Reason For Visit', required, ng-model="patient.props.reason")
-                span.msg-error(ng-show='patientForm.reason.$error.required && patientForm.reason.$dirty') Please enter reason for visit                   
-            .form-group(ng-if="patient.props.type == 'newpatient'")                  
-                input.form-control(type='number', name='phone', placeholder='Phone Number', required, ng-model="patient.props.phone", ng-minlength="10", ng-maxlength="10")
-                span.msg-error(ng-show='patientForm.phone.$error.required && patientForm.phone.$dirty') Please enter phone number
-                span.msg-error(ng-show='patientForm.phone.$dirty && patientForm.phone.$error.number && !patientForm.phone.$error.required') Please enter valid phone number
-                span.msg-error(ng-show='patientForm.phone.$invalid && patientForm.phone.$dirty && (patientForm.phone.$error.minlength || patientForm.phone.$error.maxlength) && !patientForm.phone.$error.required && !patientForm.phone.$error.number') Phone number should be 10 digits
-            .form-group(ng-if="patient.props.type == 'newpatient'")                  
-                input.form-control(type='email', name='email', placeholder='Email', required, ng-model="patient.props.email")
-                span.msg-error(ng-show='patientForm.email.$error.required && patientForm.email.$dirty') Please enter email
-                span.msg-error(ng-show='patientForm.email.$dirty && patientForm.email.$error.email && !patientForm.email.$error.required') Please enter valid email                
-            .form-group
-                .form-control
-                    input.pull-right.patient-type(type='radio', name="patient", id="newpatient", checked, ng-model="patient.props.type", value="newpatient")
-                    label.radio(for='newpatient') New Patient
-            .form-group
-                .form-control                    
-                    input.pull-right.patient-type(type='radio', name="patient", id="oldpatient", ng-model="patient.props.type", value="oldpatient")
-                    label.radio(for='oldpatient') Existing Patient
-            .form-group(ng-if="patient.props.type == 'oldpatient'")
-                input.form-control(type='text', name='id', placeholder='Enter Patient ID', required, ng-model="patient.props.id")
-                span.msg-error(ng-show='patientForm.id.$error.required && patientForm.id.$dirty') Please enter patiend id name                    
-            .form-group
-                input.img-responsive(type='image', src="./images/report-incident-logo-with-plus-icon.png", name='submit', alt="Report Incident", ng-click="reportIncident(patient)", ng-disabled="patientForm.$invalid")                  
-            p.help-text
-                span If unable to connect, you may reach the nurse at &nbsp;
-                a(href="tel:1-800-69-9362") 1-800-69-9362
-
-
+        .row
+            .col-xs-4.middle-container
+                img.img-responsive(src="../images/my-work-doc-logo.png", alt="My Work Doctor Logo")
+        .row
+            form(role="form", ng-init="patient.props.type='newpatient'", novalidate, name="patientForm")
+                .col-xs-4.patient-form.middle-container
+                    .form-group(ng-if="patient.props.type == 'newpatient'")
+                        input.form-control(type='text', name='firstname', placeholder='First Name', required, ng-model="patient.props.firstname")
+                        span.msg-error(ng-show='patientForm.firstname.$error.required && patientForm.firstname.$dirty') Please enter first name
+                    .form-group(ng-if="patient.props.type == 'newpatient'")           
+                        input.form-control(type='text', name='lastname', placeholder='Last Name', required, ng-model="patient.props.lastname")
+                        span.msg-error(ng-show='patientForm.lastname.$error.required && patientForm.lastname.$dirty') Please enter last name                    
+                    .form-group                  
+                        input.form-control(type='text', name='reason', placeholder='Reason For Visit', required, ng-model="patient.props.reason")
+                        span.msg-error(ng-show='patientForm.reason.$error.required && patientForm.reason.$dirty') Please enter reason for visit                   
+                    .form-group(ng-if="patient.props.type == 'newpatient'")                  
+                        input.form-control(type='number', name='phone', placeholder='Phone Number', required, ng-model="patient.props.phone", ng-minlength="10", ng-maxlength="10")
+                        span.msg-error(ng-show='patientForm.phone.$error.required && patientForm.phone.$dirty') Please enter phone number
+                        span.msg-error(ng-show='patientForm.phone.$dirty && patientForm.phone.$error.number && !patientForm.phone.$error.required') Please enter valid phone number
+                        span.msg-error(ng-show='patientForm.phone.$invalid && patientForm.phone.$dirty && (patientForm.phone.$error.minlength || patientForm.phone.$error.maxlength) && !patientForm.phone.$error.required && !patientForm.phone.$error.number') Phone number should be 10 digits
+                    .form-group(ng-if="patient.props.type == 'newpatient'")                  
+                        input.form-control(type='email', name='email', placeholder='Email', required, ng-model="patient.props.email")
+                        span.msg-error(ng-show='patientForm.email.$error.required && patientForm.email.$dirty') Please enter email
+                        span.msg-error(ng-show='patientForm.email.$dirty && patientForm.email.$error.email && !patientForm.email.$error.required') Please enter valid email                
+                    .form-group
+                        .form-control
+                            input.pull-right.patient-type(type='radio', name="patient", id="newpatient", checked, ng-model="patient.props.type", value="newpatient")
+                            label.radio(for='newpatient') New Patient
+                    .form-group
+                        .form-control                    
+                            input.pull-right.patient-type(type='radio', name="patient", id="oldpatient", ng-model="patient.props.type", value="oldpatient")
+                            label.radio(for='oldpatient') Existing Patient
+                    .form-group(ng-if="patient.props.type == 'oldpatient'")
+                        input.form-control(type='text', name='id', placeholder='Enter Patient ID', required, ng-model="patient.props.id")
+                        span.msg-error(ng-show='patientForm.id.$error.required && patientForm.id.$dirty') Please enter patiend id name                    
+                    .form-group
+                        input.img-responsive(type='image', src="./images/report-incident-logo-with-plus-icon.png", name='submit', alt="Report Incident", ng-click="reportIncident(patient)", ng-disabled="patientForm.$invalid")                  
+                    p.help-text
+                        span If unable to connect, you may reach the nurse at &nbsp;
+                        br
+                        a(href="tel:1-800-69-9362") 1-800-69-9362

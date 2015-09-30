@@ -1,11 +1,12 @@
 .row(ng-init="prevUrl='/patientStage1';nxtUrl='/patientStage3';pageNo=2")
-    .col-xs-12
-        h3 What is the nature of injury?
-.row(ng-repeat="item in injuryPartsList") 
-    input.pull-left.injury-type(type='checkbox', name="{{item.value}}", id="{{item.value}}", checkbox-group, checked-list="injuryPartsCheckedList", item="item")
-    label.injury-multi-select(for='{{item.value}}', ng-bind="item.value")
-.row
-     .col-xs-12
-        h4 Others :
-        textarea.other-injury-types(ng-model="otherInjuredParts")
+    .col-xs-4.middle-container
+        .row
+            .col-xs-12
+                h3 What is the nature of injury?
+        .row(ng-repeat="item in injuryNatureList") 
+            input.pull-left.injury-type(type='checkbox', name="{{item.value}}", id="{{item.value}}", checkbox-group, checked-list="injuryNatureCheckedList", item="item")
+            label.injury-multi-select(for='{{item.value}}', ng-bind="item.value")
+        .row(ng-show="viewOptions.isOthers")
+            .col-xs-12.container-top-spacing               
+                textarea.other-injury-types(ng-model="otherInjuredParts")
 include ../includes/footer

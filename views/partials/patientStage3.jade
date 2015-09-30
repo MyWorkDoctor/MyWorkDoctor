@@ -1,17 +1,19 @@
 .row(ng-init="prevUrl='/patientStage2';nxtUrl='/patientStage4';pageNo=3")
-    .col-xs-12
-        h3 What part of your body is injured?
-.row(ng-repeat="item in injuryNatureList") 
-    .col-xs-4(ng-if="item.value != 'Leg' && item.value != 'Foot' && item.value != 'Hand'")
-        input.pull-left.body-part-type(type='checkbox', name="{{item.value}}", id="{{item.value}}", checkbox-group, checked-list="injuryNatureCheckedList", item="item")
-        label.body-part-multi-select(for='{{item.value}}', ng-bind="item.value")
-    .col-xs-4(ng-if="item.value == 'Leg' || item.value == 'Foot' || item.value == 'Hand'")
-        input.pull-left.body-part-type(type='checkbox', name="{{item.value}}", id="{{item.value}}", checkbox-group, checked-list="injuryNatureCheckedList", item="item", ng-model="Options[item.value][item.value]")
-        label.body-part-multi-select(for='{{item.value}}', ng-bind="item.value")
-    .col-xs-4(ng-if="item.value == 'Leg' || item.value == 'Foot' || item.value == 'Hand'")
-        input.pull-left.body-part-type(type='checkbox', name="{{item.value}}_left", id="{{item.value}}_left", ng-model="Options[item.value].left", ng-disabled="!Options[item.value][item.value]", ng-checked="Options[item.value][item.value] && 0")
-        label.body-part-multi-select(for='{{item.value}}_left') Left
-    .col-xs-4(ng-if="item.value == 'Leg' || item.value == 'Foot' || item.value == 'Hand'")
-        input.pull-left.body-part-type(type='checkbox', name="{{item.value}}_right", id="{{item.value}}_right", ng-model="Options[item.value].right", ng-disabled="!Options[item.value][item.value]", ng-checked="Options[item.value][item.value] && 0")
-        label.body-part-multi-select(for='{{item.value}}_right') Right
+    .col-xs-4.middle-container
+        .row
+            .col-xs-12
+                h3 What part of your body is injured?
+        .row(ng-repeat="item in injuryPartsList") 
+            .col-xs-4(ng-if="!($index > 2)")
+                input.pull-left.body-part-type(type='checkbox', name="{{item.value}}", id="{{item.value}}", checkbox-group, checked-list="injuryPartsCheckedList", item="item")
+                label.body-part-multi-select(for='{{item.value}}', ng-bind="item.value")
+            .col-xs-4(ng-if="$index > 2")
+                input.pull-left.body-part-type(type='checkbox', name="{{item.value}}", id="{{item.value}}", checkbox-group, checked-list="injuryPartsCheckedList", item="item", ng-model="Options[item.value][item.value]")
+                label.body-part-multi-select(for='{{item.value}}', ng-bind="item.value")
+            .col-xs-4(ng-if="$index > 2 && Options[item.value][item.value]")
+                input.pull-left.body-part-type(type='checkbox', name="{{item.value}}_left", id="{{item.value}}_left", ng-model="Options[item.value].left", ng-checked="Options[item.value][item.value] && 0")
+                label.body-part-multi-select(for='{{item.value}}_left') Left
+            .col-xs-4(ng-if="$index > 2 && Options[item.value][item.value]")
+                input.pull-left.body-part-type(type='checkbox', name="{{item.value}}_right", id="{{item.value}}_right", ng-model="Options[item.value].right", ng-checked="Options[item.value][item.value] && 0")
+                label.body-part-multi-select(for='{{item.value}}_right') Right
 include ../includes/footer

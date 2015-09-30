@@ -12,6 +12,9 @@ var service = function(rootScope) {
     this.patientId = null
     this.uploadImageCount = 0
     this.appSession = false
+    this.quickboxLoginId = null
+    this.quickboxPassword = null
+    this.quickboxId = null
     this.setHeaderTitle = function (headerTitle){
         this.headerTitle = headerTitle
     }
@@ -92,6 +95,24 @@ var service = function(rootScope) {
     }
     this.isAppSession = function(){
         return this.appSession
+    }
+    this.setQuickboxLoginId = function(quickboxLoginId){
+        this.quickboxLoginId = quickboxLoginId;
+    }
+    this.getQuickboxLoginId = function(){
+        return this.quickboxLoginId;
+    }
+    this.setQuickboxPassword = function(quickboxPassword){
+        this.quickboxPassword = quickboxPassword;
+    }
+    this.getQuickboxPassword = function(){
+        return this.quickboxPassword;
+    }
+    this.setQuickboxId = function(quickboxId){
+        this.quickboxId = quickboxId;
+    }
+    this.getQuickboxId = function(){
+        return this.quickboxId;
     }
 }
 

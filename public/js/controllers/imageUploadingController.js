@@ -3,6 +3,8 @@ var patientStage1Ctrl = function(scope, patientSvc, location, fileReader, patien
     scope.viewOptions.headerTitle =  patientProfileModel.getHeaderTitle();
     scope.imageSrc = '../images/injured-person.png';
     scope.imageUploadSuccess = false;
+    scope.viewOptions.imageButtonUrl = "./images/skip-btn.png";
+    scope.service = patientProfileModel;
     scope.onImageUpload = function($files){
         var success = function (response){
             waitingDialog.hide();            
@@ -10,11 +12,6 @@ var patientStage1Ctrl = function(scope, patientSvc, location, fileReader, patien
             $timeout(function(){
                 scope.imageUploadSuccess = false;
             }, ERR_TIME_OUT)           
-            // ngToast.create({
-            //     'horizontalPosition*':'left',
-            //     'verticalPosition*':'top',
-            //     'content':'Image Uploaded Successfully'
-            // });
         }
         var failure = function (errMsg){
             waitingDialog.hide();
@@ -26,7 +23,7 @@ var patientStage1Ctrl = function(scope, patientSvc, location, fileReader, patien
         fileReader.readAsDataUrl(scope.image, scope)
             .then(function(result) {
                 scope.imageSrc = result;
-                patientProfileModel.incrementUploadImageCount();
+                scope.imagesCount = patientProfileModel.incrementUploadImageCount();
                 var obj = {
                   "roomid":patientProfileModel.getRoomId(),
                   "imagedata": scope.imageSrc,
@@ -46,21 +43,14 @@ var patientStage1Ctrl = function(scope, patientSvc, location, fileReader, patien
         }
         $('#patientImage').click()
     }
+    scope.$watch('service.getUploadImageCount()', function(newVal){
+        if(newVal > 0){
+            scope.viewOptions.imageButtonUrl = "./images/next-btn.png";
+        }else {
+            scope.viewOptions.imageButtonUrl = "./images/skip-btn.png";
+        }        
+    })
 }
 
 patientStage1Ctrl.$inject = DEPS;
 myWorkDoc.controller('patientStage1Ctrl', patientStage1Ctrl);
-// if(webcam.getCameraList().length == 0){  
-//    alert('You don\'t have a web camera');  
-// }
-
-// navigator.getMedia = ( navigator.getUserMedia || // use the proper vendor prefix
-//                        navigator.webkitGetUserMedia ||
-//                        navigator.mozGetUserMedia ||
-//                        navigator.msGetUserMedia);
-
-// navigator.getMedia({video: true}, function() {
-//   // webcam is available
-// }, function() {
-//   // webcam is not available
-// });

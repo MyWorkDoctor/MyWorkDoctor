@@ -1,28 +1,33 @@
 var DEPS = ['$scope', '$location', '$log', '$filter', "patientSvc", 'patientProfileModel'];
 var patientQueryCtrl = function(scope, location, log, filter, patientSvc, patientProfileModel) {
     scope.viewOptions.headerTitle =  patientProfileModel.getHeaderTitle();
-    scope.injuryPartsCheckedList = [];
     scope.injuryNatureCheckedList = [];
-    scope.Options = {}    
-    scope.injuryPartsList = [
+    scope.injuryPartsCheckedList = [];
+    scope.Options = {}
+    scope.viewOptions.isOthers = false;
+    scope.injuryNatureList = [
         {
             "id":1,
-            "value":"Cut"
-        },
-        {
-            "id":2,
             "value":"Burn"
         },
         {
+            "id":2,
+            "value":"Crush"
+        },
+        {
             "id":3,
-            "value":"Strain/Sprain"
+            "value":"Cut"
         },
         {
             "id":4,
-            "value":"Crush"
+            "value":"Strain/Sprain"
+        },
+        {
+            "id":5,
+            "value":"Others"
         }
     ]
-    scope.injuryNatureList = [
+    scope.injuryPartsList = [
         {
             "id":1,
             "value":"Head"
@@ -90,7 +95,7 @@ var patientQueryCtrl = function(scope, location, log, filter, patientSvc, patien
         }        
     }
     var setInjuredParts = function (nxtUrl) {
-        var listedInjuredParts = filter("selectedObjects")(scope.injuryPartsList, scope.injuryPartsCheckedList);
+        var listedInjuredParts = filter("selectedObjects")(scope.injuryNatureList, scope.injuryNatureCheckedList);
         var obj = {
             "listedInjuredParts" : listedInjuredParts,
             "otherInjuredParts" : scope.otherInjuredParts
@@ -99,7 +104,7 @@ var patientQueryCtrl = function(scope, location, log, filter, patientSvc, patien
         location.path(nxtUrl);
     }
     var setNatureOfInjury = function (nxtUrl){
-        var listedInjuryNature = filter("selectedObjects")(scope.injuryNatureList, scope.injuryNatureCheckedList);
+        var listedInjuryNature = filter("selectedObjects")(scope.injuryPartsList, scope.injuryPartsCheckedList);
         var obj = {
             "listedInjuryNature" : listedInjuryNature,
             "options" : scope.Options
@@ -129,6 +134,13 @@ var patientQueryCtrl = function(scope, location, log, filter, patientSvc, patien
         return patientSvc.addQuestions(obj)
             .then(success, failure)
     }
+    scope.$watchCollection("injuryNatureCheckedList", function(newVal){
+        if(scope.injuryNatureCheckedList.indexOf(5) != -1){
+            scope.viewOptions.isOthers = true
+        } else {
+            scope.viewOptions.isOthers = false
+        }
+    })
 }
 
 patientQueryCtrl.$inject = DEPS;

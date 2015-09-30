@@ -1,0 +1,22 @@
+.footer
+    .footer-container
+        img(src="../images/icon-hangup.png", alt="Hung Up", ng-click="rejectCall()")
+.video-content-wrapper
+    .video-wrapper
+        video(id="remoteVideo")
+    .col-xs-2.pull-left.videos-small-wrapper.videos-left
+        .videos-container
+            .video-small
+                video(id="localVideo")
+    .col-xs-2.pull-right.videos-small-wrapper.videos-right
+        .videos-container            
+
+audio(id="callingSignal", loop)
+    source(src="audio/calling.ogg")
+    source(src="audio/calling.mp3")
+audio(id="ringtoneSignal", loop)
+    source(src="audio/calling.ogg")
+    source(src="audio/calling.mp3")
+audio(id="endCallSignal", loop)
+    source(src="audio/calling.ogg")
+    source(src="audio/calling.mp3")

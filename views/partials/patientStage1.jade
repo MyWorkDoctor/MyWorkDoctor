@@ -1,10 +1,11 @@
 .alert.alert-success.alert-dismissable(ng-if="imageUploadSuccess") Success! Image Uploaded Successfully.
 alert.alert-danger.alert-dismissable(ng-bind="viewOptions.errMsg", ng-if="viewOptions.errMsg")
 .row
-    .col-xs-12
+    .col-xs-4.middle-container.container-top-spacing
         //- webcam(on-stream="onStream(stream)", on-access-denied="onError(err)", on-streaming="onSuccess()", placeholder="'./images/ajax-loading.gif'")
         img.img-responsive(src="{{imageSrc}}", alt="My Work Doctor Logo")    
-    .col-xs-12.camera-nxt
+.row        
+    .col-xs-4.camera-nxt.middle-container
         input.img-responsive(type="file", ng-file-select="onImageUpload($files)", style="display:none", id="patientImage", name="patientImage")
         img.img-responsive(src="../images/camera-icon.png", alt="My Work Doctor Logo", ng-click="imageUpload()", style="cursor:pointer")
-        input.img-responsive(type='image', src="./images/next-btn.png", name='submit', alt="Next", ng-click="next()")
+        input.img-responsive(type='image', src="{{viewOptions.imageButtonUrl}}", name='submit', alt="Next", ng-click="next()")

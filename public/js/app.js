@@ -16,7 +16,7 @@ var routeConfig = function (routeProvider, locationProvider){
     })
     .when('/patientStage1', {
         templateUrl: 'partials/patientStage1',
-        controller: 'patientStage1Ctrl'
+        controller: 'imageUploadingController'
     })
     .when('/patientStage2', {
         templateUrl: 'partials/patientStage2',
@@ -32,16 +32,8 @@ var routeConfig = function (routeProvider, locationProvider){
     })
     .when('/patientStage5', {
         templateUrl: 'partials/patientStage5',
-        controller: 'patientStage5Ctrl'
-    })
-    .when('/patientStage6', {
-        templateUrl: 'partials/patientStage6',
-        controller: 'patientStage6Ctrl'
-    })
-    .when('/patientStage7', {
-        templateUrl: 'partials/patientStage7',
-        controller: 'patientStage7Ctrl'
-    })
+        controller: 'videoCallReceivingCtrl'
+    })    
     .otherwise({
         redirectTo: "/"
     });

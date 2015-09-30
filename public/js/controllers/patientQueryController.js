@@ -5,6 +5,7 @@ var patientQueryCtrl = function(scope, location, log, filter, patientSvc, patien
     scope.injuryPartsCheckedList = [];
     scope.Options = {}
     scope.viewOptions.isOthers = false;
+    scope.viewOptions.errMsg = null;
     scope.injuryNatureList = [
         {
             "id":1,
@@ -62,16 +63,19 @@ var patientQueryCtrl = function(scope, location, log, filter, patientSvc, patien
     }
     scope.next = function(nxtUrl, pageNo){
         switch(pageNo){
-            case 2:                
-                setInjuredParts(nxtUrl)
+            case 2:                                
+                setNatureOfInjury(nxtUrl)
                 break;
             case 3:                
-                setNatureOfInjury(nxtUrl)
+                setInjuredParts(nxtUrl)
                 break;
             case 4:                
                 patientProfileModel.setPainLevel(scope.painLevel);
                 var injuredParts = getValuesArray(patientProfileModel.getInjuredParts().listedInjuredParts);
-                injuredParts.push(patientProfileModel.getInjuredParts().otherInjuredParts)
+                var otherInjuredParts = patientProfileModel.getInjuredParts().otherInjuredParts;
+                if(otherInjuredParts !== undefined && otherInjuredParts !== null && otherInjuredParts !== ""){
+                    injuredParts.push(otherInjuredParts)
+                }                
                 var injuryNature = getValuesArray(patientProfileModel.getInjuryNature().listedInjuryNature);
                 
                 var obj = {
@@ -80,11 +84,11 @@ var patientQueryCtrl = function(scope, location, log, filter, patientSvc, patien
                     "Questions":[ 
                         {
                             "Question" : "What is the Nature of injury?",
-                            "Answers" : injuredParts
+                            "Answers" : injuryNature
                         }, 
                         {
                             "Question" : "What part of body is injured?",
-                            "Answers" : injuryNature
+                            "Answers" : injuredParts
                         }
                     ],
                     "severity":patientProfileModel.getPainLevel()
@@ -95,7 +99,7 @@ var patientQueryCtrl = function(scope, location, log, filter, patientSvc, patien
         }        
     }
     var setInjuredParts = function (nxtUrl) {
-        var listedInjuredParts = filter("selectedObjects")(scope.injuryNatureList, scope.injuryNatureCheckedList);
+        var listedInjuredParts = filter("selectedObjects")(scope.injuryPartsList, scope.injuryPartsCheckedList);
         var obj = {
             "listedInjuredParts" : listedInjuredParts,
             "otherInjuredParts" : scope.otherInjuredParts
@@ -104,7 +108,7 @@ var patientQueryCtrl = function(scope, location, log, filter, patientSvc, patien
         location.path(nxtUrl);
     }
     var setNatureOfInjury = function (nxtUrl){
-        var listedInjuryNature = filter("selectedObjects")(scope.injuryPartsList, scope.injuryPartsCheckedList);
+        var listedInjuryNature = filter("selectedObjects")(scope.injuryNatureList, scope.injuryNatureCheckedList);
         var obj = {
             "listedInjuryNature" : listedInjuryNature,
             "options" : scope.Options

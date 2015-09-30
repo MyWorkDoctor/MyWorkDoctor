@@ -2,6 +2,7 @@ var DEPS = ['$scope', "$location", "$http", "patientSvc", "patientProfileModel",
 var patientProfileCtrl = function(scope, location, http, patientSvc, patientProfileModel, QUICK_BLOX_CONFIG) {
     scope.patient = {}    
     scope.viewOptions.headerTitle =  patientProfileModel.getHeaderTitle();
+    scope.viewOptions.errMsg = null
     scope.reportIncident = function (patient) {
         if(patient.props.type == 'newpatient'){
             patientProfileModel.setNewPatient(true);

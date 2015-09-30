@@ -1,9 +1,10 @@
 var DEPS = ['$scope', '$location', 'patientProfileModel', 'QUICK_BLOX_CONFIG', '$timeout'];
-var patientStage5Ctrl = function(scope, location, patientProfileModel, QUICK_BLOX_CONFIG, $timeout) {
+var videoCallReceivingCtrl = function(scope, location, patientProfileModel, QUICK_BLOX_CONFIG, $timeout) {
     scope.viewOptions.headerTitle =  patientProfileModel.getHeaderTitle();
     var calleeId = null
     var mediaParams = null
-    scope.isVideoCall = false
+    scope.isVideoCall = false;
+    scope.viewOptions.errMsg = null;
     scope.previous = function(){
         location.path("/patientStage4");
     }
@@ -105,5 +106,5 @@ var patientStage5Ctrl = function(scope, location, patientProfileModel, QUICK_BLO
     
 }
 
-patientStage5Ctrl.$inject = DEPS;
-myWorkDoc.controller('patientStage5Ctrl', patientStage5Ctrl);
+videoCallReceivingCtrl.$inject = DEPS;
+myWorkDoc.controller('videoCallReceivingCtrl', videoCallReceivingCtrl);

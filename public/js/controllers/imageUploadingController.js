@@ -1,10 +1,11 @@
 var DEPS = ['$scope', 'patientSvc', '$location', 'fileReader', 'patientProfileModel', '$base64', "$timeout", 'ERR_TIME_OUT'];
-var patientStage1Ctrl = function(scope, patientSvc, location, fileReader, patientProfileModel, base64, $timeout, ERR_TIME_OUT) {    
+var imageUploadingController = function(scope, patientSvc, location, fileReader, patientProfileModel, base64, $timeout, ERR_TIME_OUT) {    
     scope.viewOptions.headerTitle =  patientProfileModel.getHeaderTitle();
     scope.imageSrc = '../images/injured-person.png';
     scope.imageUploadSuccess = false;
     scope.viewOptions.imageButtonUrl = "./images/skip-btn.png";
     scope.service = patientProfileModel;
+    scope.viewOptions.errMsg = null
     scope.onImageUpload = function($files){
         var success = function (response){
             waitingDialog.hide();            
@@ -52,5 +53,5 @@ var patientStage1Ctrl = function(scope, patientSvc, location, fileReader, patien
     })
 }
 
-patientStage1Ctrl.$inject = DEPS;
-myWorkDoc.controller('patientStage1Ctrl', patientStage1Ctrl);
+imageUploadingController.$inject = DEPS;
+myWorkDoc.controller('imageUploadingController', imageUploadingController);

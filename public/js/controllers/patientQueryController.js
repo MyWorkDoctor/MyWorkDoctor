@@ -102,7 +102,8 @@ var patientQueryCtrl = function(scope, location, log, filter, patientSvc, patien
         var listedInjuredParts = filter("selectedObjects")(scope.injuryPartsList, scope.injuryPartsCheckedList);
         var obj = {
             "listedInjuredParts" : listedInjuredParts,
-            "otherInjuredParts" : scope.otherInjuredParts
+            "options" : scope.Options
+            
         }        
         patientProfileModel.setInjuredParts(obj);
         location.path(nxtUrl);
@@ -110,8 +111,8 @@ var patientQueryCtrl = function(scope, location, log, filter, patientSvc, patien
     var setNatureOfInjury = function (nxtUrl){
         var listedInjuryNature = filter("selectedObjects")(scope.injuryNatureList, scope.injuryNatureCheckedList);
         var obj = {
-            "listedInjuryNature" : listedInjuryNature,
-            "options" : scope.Options
+            "listedInjuryNature" : listedInjuryNature,            
+            "otherInjuredParts" : scope.otherInjuredParts
         }        
         patientProfileModel.setInjuryNature(obj);
         location.path(nxtUrl);

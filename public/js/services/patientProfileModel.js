@@ -35,14 +35,8 @@ var service = function(rootScope) {
     }
     this.setInjuredParts = function (injuredParts){
         this.injuredParts = injuredParts
-    }
-    this.getInjuredParts = function () {
-        return this.injuredParts;
-    }
-    this.setInjuryNature = function(injuryNature) {
-        this.injuryNature = injuryNature;
-        angular.forEach(injuryNature.options, function(value, key){
-            angular.forEach(injuryNature.listedInjuryNature, function(obj){
+        angular.forEach(injuredParts.options, function(value, key){
+            angular.forEach(injuredParts.listedInjuredParts, function(obj){
                 if(key === obj.value){                    
                     if(value.left){
                         obj.value += "-left";
@@ -53,6 +47,12 @@ var service = function(rootScope) {
                 }
             });
         })
+    }
+    this.getInjuredParts = function () {
+        return this.injuredParts;
+    }
+    this.setInjuryNature = function(injuryNature) {
+        this.injuryNature = injuryNature;        
     }
     this.getInjuryNature = function() {
         return this.injuryNature;
